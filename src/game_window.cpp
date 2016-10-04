@@ -87,8 +87,8 @@ bool GameWindow::init()
 
     if (init_opengl())
     {
-        char *version = (char *) glGetString(GL_VERSION);
-        char *version_glsl = (char *) glGetString(GL_SHADING_LANGUAGE_VERSION);
+        char *version = (char *)glGetString(GL_VERSION);
+        char *version_glsl = (char *)glGetString(GL_SHADING_LANGUAGE_VERSION);
         std::cout << "OpenGL version: " << version << std::endl;
         std::cout << "GLSL version: " << version_glsl << std::endl;
     }
