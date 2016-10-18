@@ -108,5 +108,10 @@ void LangtonsAnt::update(float delta)
     }
 }
 
-void LangtonsAnt::draw() { m_grid->draw(); }
-void LangtonsAnt::reset() {}
+void LangtonsAnt::draw()
+{
+    m_grid->draw();
+}
+void LangtonsAnt::reset()
+{
+}

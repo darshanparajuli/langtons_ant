@@ -60,4 +60,7 @@ void Mesh::unbind()
     glBindVertexArray(0);
 }
 
-void Mesh::draw() { glDrawElements(GL_TRIANGLES, m_icount, GL_UNSIGNED_INT, 0); }
+void Mesh::draw()
+{
+    glDrawElements(GL_TRIANGLES, m_icount, GL_UNSIGNED_INT, 0);
+}

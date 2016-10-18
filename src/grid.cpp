@@ -42,8 +42,14 @@ void Grid::reset()
     }
 }
 
-void Grid::set_value(int row, int col, int value) { m_grid[row][col] = value; }
-int Grid::get_value(int row, int col) { return m_grid[row][col]; }
+void Grid::set_value(int row, int col, int value)
+{
+    m_grid[row][col] = value;
+}
+int Grid::get_value(int row, int col)
+{
+    return m_grid[row][col];
+}
 void Grid::draw()
 {
     m_shader->bind();

@@ -5,7 +5,10 @@
 #include <iostream>
 #include <vector>
 
-Shader::Shader() : m_program(0), m_uniform_location_map(std::map<const char *, GLint>()) {}
+Shader::Shader() : m_program(0), m_uniform_location_map(std::map<const char *, GLint>())
+{
+}
+
 Shader::~Shader()
 {
     if (m_program)
@@ -105,8 +108,14 @@ void Shader::init(const char *file_path_vertex, const char *file_path_fragment)
     glDetachShader(m_program, fragment_shader);
 }
 
-void Shader::bind() { glUseProgram(m_program); }
-void Shader::unbind() { glUseProgram(0); }
+void Shader::bind()
+{
+    glUseProgram(m_program);
+}
+void Shader::unbind()
+{
+    glUseProgram(0);
+}
 void Shader::set_uniform_mat4(const char *name, const glm::mat4 &matrix)
 {
     glUniformMatrix4fv(get_uniform_location(name), 1, GL_FALSE, &matrix[0][0]);

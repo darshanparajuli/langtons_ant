@@ -25,8 +25,14 @@ public:
     void draw(void);
 
 public:
-    inline int get_row_count() const { return m_row_count; }
-    inline int get_col_count() const { return m_col_count; }
+    inline int get_row_count() const
+    {
+        return m_row_count;
+    }
+    inline int get_col_count() const
+    {
+        return m_col_count;
+    }
 };
 
 #endif
