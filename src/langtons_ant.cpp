@@ -1,7 +1,7 @@
 #include "langtons_ant.h"
+#include <time.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
-#include <time.h>
 
 LangtonsAnt::LangtonsAnt(int width, int height)
     : m_window(new GameWindow("Langton's Ant", width, height)), m_grid(nullptr), m_running(false), m_paused(false)

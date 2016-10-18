@@ -1,10 +1,8 @@
-#include "langtons_ant.h"
 #include <iostream>
+#include "langtons_ant.h"
 
 int main()
 {
-    int a;
-    std::cin >> a;
     LangtonsAnt ant(800, 800);
     ant.run();
     return 0;
