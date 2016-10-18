@@ -5,9 +5,7 @@
 #include <iostream>
 #include <vector>
 
-Shader::Shader() : m_program(0)
-{
-}
+Shader::Shader() : m_program(0), m_uniform_location_map(std::map<const char *, GLint>()) {}
 Shader::~Shader()
 {
     if (m_program)
@@ -26,7 +24,7 @@ void Shader::init(const char *file_path_vertex, const char *file_path_fragment)
     }
 
     GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    const GLchar *shader_src = (GLchar *) vertex_source.c_str();
+    const GLchar *shader_src = (GLchar *)vertex_source.c_str();
     std::cout << "compiling shader: " << file_path_vertex << std::endl;
     glShaderSource(vertex_shader, 1, &shader_src, NULL);
     glCompileShader(vertex_shader);
@@ -51,7 +49,7 @@ void Shader::init(const char *file_path_vertex, const char *file_path_fragment)
     }
 
     GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    shader_src = (GLchar *) fragment_source.c_str();
+    shader_src = (GLchar *)fragment_source.c_str();
     std::cout << "compiling shader: " << file_path_fragment << std::endl;
     glShaderSource(fragment_shader, 1, &shader_src, 0);
     glCompileShader(fragment_shader);
@@ -82,7 +80,7 @@ void Shader::init(const char *file_path_vertex, const char *file_path_fragment)
     glLinkProgram(m_program);
 
     GLint is_linked = 0;
-    glGetProgramiv(m_program, GL_LINK_STATUS, (int *) &is_linked);
+    glGetProgramiv(m_program, GL_LINK_STATUS, (int *)&is_linked);
     if (is_linked == GL_FALSE)
     {
         GLint max_length;
@@ -107,14 +105,8 @@ void Shader::init(const char *file_path_vertex, const char *file_path_fragment)
     glDetachShader(m_program, fragment_shader);
 }
 
-void Shader::bind()
-{
-    glUseProgram(m_program);
-}
-void Shader::unbind()
-{
-    glUseProgram(0);
-}
+void Shader::bind() { glUseProgram(m_program); }
+void Shader::unbind() { glUseProgram(0); }
 void Shader::set_uniform_mat4(const char *name, const glm::mat4 &matrix)
 {
     glUniformMatrix4fv(get_uniform_location(name), 1, GL_FALSE, &matrix[0][0]);

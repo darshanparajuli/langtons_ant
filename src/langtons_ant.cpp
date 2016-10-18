@@ -1,10 +1,10 @@
 #include "langtons_ant.h"
-#include <time.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
+#include <time.h>
 
 LangtonsAnt::LangtonsAnt(int width, int height)
-    : m_window(new GameWindow("Langton's Ant", width, height)), m_running(false), m_paused(false)
+    : m_window(new GameWindow("Langton's Ant", width, height)), m_grid(nullptr), m_running(false), m_paused(false)
 {
     if (!m_window->init())
     {
@@ -16,10 +16,11 @@ LangtonsAnt::LangtonsAnt(int width, int height)
         m_running = true;
     }
 
-    // m_projection_matrix =
-    //     glm::ortho(m_world_size.left, m_world_size.right, m_world_size.bottom, m_world_size.top, -1.0f, 100.0f);
-    // m_view_matrix =
-    //     glm::lookAt(glm::vec3(0.0f, 0.0f, 100.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    m_projection_matrix = glm::ortho(-100.0f, 100.0f, -100.0f, 100.0f, -1.0f, 100.0f);
+    m_view_matrix =
+        glm::lookAt(glm::vec3(0.0f, 0.0f, 100.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+    m_grid = new Grid(100, 100);
 
     std::srand(time(NULL));
 }
@@ -30,6 +31,7 @@ LangtonsAnt::~LangtonsAnt()
     {
         delete m_window;
     }
+    delete m_grid;
 }
 
 void LangtonsAnt::run()
@@ -106,10 +108,5 @@ void LangtonsAnt::update(float delta)
     }
 }
 
-void LangtonsAnt::draw()
-{
-}
-
-void LangtonsAnt::reset()
-{
-}
+void LangtonsAnt::draw() { m_grid->draw(); }
+void LangtonsAnt::reset() {}

@@ -1,5 +1,5 @@
-#include "game_window.h"
 #include <iostream>
+#include "game_window.h"
 
 GameWindow::GameWindow(const char *title, int width, int height)
     : m_title(title),
