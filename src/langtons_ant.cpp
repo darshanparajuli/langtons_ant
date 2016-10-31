@@ -1,4 +1,4 @@
-#include "langtons_ant.h"
+#include "headers/langtons_ant.h"
 #include <time.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>

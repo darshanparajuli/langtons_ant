@@ -1,4 +1,4 @@
-#include "mesh.h"
+#include "headers/mesh.h"
 
 Mesh::Mesh(glm::vec3 *vertices, int vcount, int *indices, int icount, glm::vec2 *tex_coord, int tcount)
 {

@@ -1,4 +1,4 @@
-#include "grid.h"
+#include "headers/grid.h"
 #include <iostream>
 
 Grid::Grid(int row_count, int col_count)

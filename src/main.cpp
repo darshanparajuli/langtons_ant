@@ -1,5 +1,5 @@
 #include <iostream>
-#include "langtons_ant.h"
+#include "headers/langtons_ant.h"
 
 int main()
 {

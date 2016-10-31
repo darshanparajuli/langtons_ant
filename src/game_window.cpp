@@ -1,4 +1,4 @@
-#include "game_window.h"
+#include "headers/game_window.h"
 #include <iostream>
 
 GameWindow::GameWindow(const char *title, int width, int height)
