@@ -14,6 +14,8 @@ private:
     glm::mat4 m_view_matrix;
 
     Grid *m_grid;
+    Mesh *m_mesh;
+    Shader *m_shader;
 
     bool m_running;
     bool m_paused;
