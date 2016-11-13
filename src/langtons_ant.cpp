@@ -112,6 +112,11 @@ void LangtonsAnt::handle_input(const SDL_Event &event)
                 }
             }
             break;
+            case SDLK_g:
+            {
+                m_world->set_render_grid(!m_world->is_grid_rendered());
+            }
+            break;
         }
     }
 }

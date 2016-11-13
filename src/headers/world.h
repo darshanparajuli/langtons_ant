@@ -68,6 +68,10 @@ public:
     {
         m_render_grid = render_grid;
     }
+    inline bool is_grid_rendered() const
+    {
+        return m_render_grid;
+    }
 };
 
 #endif

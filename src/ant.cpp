@@ -16,8 +16,9 @@ Ant::Ant(Camera *camera, float w, float h)
       m_speed(0.5f),
       m_dir(Ant::Direction::EAST)
 {
-    glm::vec3 vertices[] = {glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, h, 0.0f), glm::vec3(w, h, 0.0f),
-                            glm::vec3(w, 0.0f, 0.0f)};
+    glm::vec3 vertices[] = {glm::vec3(-w / 2.0f, -h / 2.0f, 0.0f), glm::vec3(-w / 2.0f, h / 2.0f, 0.0f),
+                            glm::vec3(w / 2.0f, h / 2.0f, 0.0f), glm::vec3(w / 2.0f, -h / 2.0f, 0.0f)};
+
     int indices[] = {0, 1, 3, 1, 2, 3};
     glm::vec2 tex_coords[] = {glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 0.0f), glm::vec2(1.0f, 1.0f),
                               glm::vec2(0.0f, 1.0f)};
@@ -42,6 +43,7 @@ void Ant::init()
     m_shader->unbind();
 
     m_texture->load();
+    m_transform.set_scale(glm::vec3(0.9f, 0.9f, 1.0f));
 }
 
 void Ant::update(float delta_time)

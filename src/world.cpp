@@ -23,8 +23,10 @@ World::World(Camera *camera, int row_count, int col_count)
     }
     reset();
 
-    glm::vec3 vertices[] = {glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, m_cell_height, 0.0f),
-                            glm::vec3(m_cell_width, m_cell_height, 0.0f), glm::vec3(m_cell_width, 0.0f, 0.0f)};
+    glm::vec3 vertices[] = {glm::vec3(-m_cell_width / 2.0f, -m_cell_height / 2.0f, 0.0f),
+                            glm::vec3(-m_cell_width / 2.0f, m_cell_height / 2.0f, 0.0f),
+                            glm::vec3(m_cell_width / 2.0f, m_cell_height / 2.0f, 0.0f),
+                            glm::vec3(m_cell_width / 2.0f, -m_cell_height / 2.0f, 0.0f)};
     int indices[] = {0, 1, 3, 1, 2, 3};
     glm::vec2 tex_coords[] = {glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 0.0f), glm::vec2(1.0f, 1.0f),
                               glm::vec2(0.0f, 1.0f)};
@@ -83,7 +85,7 @@ void World::render()
     m_shader->set_uniform_float("intensity", 1.0f);
 
     glm::mat4 model = glm::mat4(1.0f);
-    m_transform.set_scale(glm::vec3(1.0f, 1.0f, 1.0f));
+    m_transform.set_scale(glm::vec3(0.9f, 0.9f, 1.0f));
 
     for (int r = 0; r < m_row_count; ++r)
     {
@@ -110,18 +112,18 @@ void World::render()
         m_shader->set_uniform_float("intensity", 0.5f);
 
         float vline_width = 10.0f / m_col_count;
-        m_transform.set_scale(glm::vec3(vline_width, 1.0f * m_row_count, 1.0f));
-        for (int i = -m_col_count / 2 + 1; i < m_col_count / 2; ++i)
+        m_transform.set_scale(glm::vec3(vline_width, 1.0f * m_row_count * 2, 1.0f));
+        for (int i = -m_col_count / 2 + 1; i <= m_col_count / 2; ++i)
         {
-            m_transform.set_position(glm::vec3(i * m_cell_width, -1.0f, 0.0f));
+            m_transform.set_position(glm::vec3(i * m_cell_width - m_cell_width / 2.0f, -1.0f, 0.0f));
             m_shader->set_uniform_mat4("transform", m_transform.apply_transform(model));
             m_mesh->draw();
         }
         float hline_width = 10.0f / m_row_count;
-        m_transform.set_scale(glm::vec3(1.0f * m_col_count, hline_width, 1.0f));
-        for (int i = -m_row_count / 2 + 1; i < m_row_count / 2; ++i)
+        m_transform.set_scale(glm::vec3(1.0f * m_col_count * 2, hline_width, 1.0f));
+        for (int i = -m_row_count / 2 + 1; i <= m_row_count / 2; ++i)
         {
-            m_transform.set_position(glm::vec3(-1.0f, i * m_cell_height, 0.0f));
+            m_transform.set_position(glm::vec3(-1.0f, i * m_cell_height - m_cell_height / 2.0f, 0.0f));
             m_shader->set_uniform_mat4("transform", m_transform.apply_transform(model));
             m_mesh->draw();
         }
