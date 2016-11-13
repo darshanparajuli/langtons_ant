@@ -10,14 +10,15 @@ OBJECTS = $(addprefix $(BUILD_DIR)/, $(notdir $(SOURCES:.cpp=.o)))
 .PHONY: all
 all: $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CXX) $(CFLAGS) $^ -o $(EXECUTABLE) $(LDFLAGS)
-
 .PHONY: run
 run: $(EXECUTABLE)
 	@./$(EXECUTABLE)
 
+$(EXECUTABLE): $(OBJECTS)
+	$(CXX) $(CFLAGS) $^ -o $(EXECUTABLE) $(LDFLAGS)
+
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(BUILD_DIR)
 	$(CXX) $(CFLAGS) -c $^ -o $@
 
 .PHONY: rebuild
@@ -25,5 +26,5 @@ rebuild: clean all
 
 .PHONY: clean
 clean:
-	rm -f $(BUILD_DIR)/*.o
-	rm -f $(EXECUTABLE)
+	@rm -f $(BUILD_DIR)/*.o
+	@rm -f $(EXECUTABLE)

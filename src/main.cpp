@@ -1,4 +1,3 @@
-#include <iostream>
 #include "headers/langtons_ant.h"
 
 int main()

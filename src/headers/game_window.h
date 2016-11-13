@@ -24,13 +24,13 @@ private:
 
 public:
     GameWindow(const char *m_title, int width, int height);
-    ~GameWindow();
+    ~GameWindow(void);
     bool init(void);
     void update(void);
     void resize(int width, int height);
 
 public:
-    inline bool is_running() const
+    inline bool is_running(void) const
     {
         return m_running;
     }
@@ -38,11 +38,11 @@ public:
     {
         glClear(GL_COLOR_BUFFER_BIT);
     }
-    inline float get_delta_time() const
+    inline float get_delta_time(void) const
     {
         return m_delta_time;
     }
-    inline void exit()
+    inline void exit(void)
     {
         m_running = false;
     }

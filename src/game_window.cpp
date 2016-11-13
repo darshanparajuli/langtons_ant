@@ -22,7 +22,6 @@ GameWindow::~GameWindow()
         SDL_GL_DeleteContext(m_gl_context);
         SDL_DestroyWindow(m_window);
     }
-
     SDL_Quit();
 }
 
@@ -32,6 +31,7 @@ bool GameWindow::init_opengl()
     if (error != GLEW_OK)
     {
         // TODO(darshan): check for supported GL version
+        std::cerr << "glew failed to init" << std::endl;
         return false;
     }
 
@@ -57,7 +57,7 @@ bool GameWindow::init()
     }
 
     m_window = SDL_CreateWindow(m_title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height,
-                                SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+                                SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
     if (m_window == NULL)
     {

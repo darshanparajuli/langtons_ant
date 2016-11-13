@@ -13,10 +13,10 @@ private:
 
 public:
     Texture(const char *file_path);
-    ~Texture();
-    void load();
-    void bind();
-    void unbind();
+    ~Texture(void);
+    void load(void);
+    void bind(void);
+    void unbind(void);
 };
 
 #endif

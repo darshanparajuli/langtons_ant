@@ -23,12 +23,13 @@ public:
     void init(const char *file_path_vertex, const char *file_path_fragment);
     void bind(void);
     void unbind(void);
+    void set_uniform_float(const char *name, float val);
     void set_uniform_mat4(const char *name, const glm::mat4 &matrix);
     void set_uniform_vec3(const char *name, const glm::vec3 &v);
     void set_uniform_vec4(const char *name, const glm::vec4 &v);
     GLint get_uniform_location(const char *name);
 
-    inline int get_program() const
+    inline int get_program(void) const
     {
         return m_program;
     }

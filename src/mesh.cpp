@@ -1,9 +1,8 @@
 #include "headers/mesh.h"
 
 Mesh::Mesh(glm::vec3 *vertices, int vcount, int *indices, int icount, glm::vec2 *tex_coord, int tcount)
+    : m_vao(0), m_vbo(0), m_ibo(0), m_tbo(0), m_icount(icount)
 {
-    m_icount = icount;
-
     glGenVertexArrays(1, &m_vao);
     glBindVertexArray(m_vao);
 
