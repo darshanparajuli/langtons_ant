@@ -15,7 +15,8 @@ inline bool float_eq(float a, float b)
     return std::fabs(a - b) <= std::numeric_limits<float>::epsilon();
 }
 
-inline float clampf(float v, float min, float max)
+template <typename T>
+inline float clamp(T v, T min, T max)
 {
     return (v < min) ? min : (v > max ? max : v);
 }

@@ -38,6 +38,7 @@ public:
     virtual void init(void);
     virtual void update(float delta_time);
     virtual void render(void);
+    void reset(void);
     inline void set_target_x(float x)
     {
         m_target_x = x;

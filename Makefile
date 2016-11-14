@@ -26,5 +26,5 @@ rebuild: clean all
 
 .PHONY: clean
 clean:
-	@rm -f $(BUILD_DIR)/*.o
-	@rm -f $(EXECUTABLE)
+	rm -f $(BUILD_DIR)/*
+	rm -f $(EXECUTABLE)

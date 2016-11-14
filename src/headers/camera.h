@@ -2,6 +2,7 @@
 #define CAMERA_H_
 
 #include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
 
 class Camera
 {
@@ -19,6 +20,10 @@ public:
     inline const glm::mat4& get_projection_matrix() const
     {
         return m_projection_matrix;
+    }
+    inline void move_left()
+    {
+        m_view_matrix = glm::translate(m_view_matrix, glm::vec3(-0.1f, 0.0f, 0.0f));
     }
 };
 

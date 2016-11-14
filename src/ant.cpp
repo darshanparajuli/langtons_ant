@@ -11,9 +11,9 @@ Ant::Ant(Camera *camera, float w, float h)
       m_height(h),
       m_x(0.0f),
       m_y(0.0f),
-      m_target_x(0.0f),
-      m_target_y(0.0f),
-      m_speed(0.5f),
+      m_target_x(m_x),
+      m_target_y(m_y),
+      m_speed(0.1f),
       m_dir(Ant::Direction::EAST)
 {
     glm::vec3 vertices[] = {glm::vec3(-w / 2.0f, -h / 2.0f, 0.0f), glm::vec3(-w / 2.0f, h / 2.0f, 0.0f),
@@ -37,11 +37,6 @@ Ant::~Ant()
 void Ant::init()
 {
     m_shader->init("shaders/ant.vert", "shaders/ant.frag");
-    m_shader->bind();
-    m_shader->set_uniform_mat4("projection", m_camera->get_projection_matrix());
-    m_shader->set_uniform_mat4("view", m_camera->get_view_matrix());
-    m_shader->unbind();
-
     m_texture->load();
     m_transform.set_scale(glm::vec3(0.9f, 0.9f, 1.0f));
 }
@@ -49,7 +44,6 @@ void Ant::init()
 void Ant::update(float delta_time)
 {
     float s = delta_time * m_speed;
-    // s = utils::clampf(s, 0.0f, 1.0f);
     switch (m_dir)
     {
         case EAST:
@@ -109,7 +103,10 @@ void Ant::render()
     m_texture->bind();
     m_shader->bind();
 
+    m_shader->set_uniform_mat4("projection", m_camera->get_projection_matrix());
+    m_shader->set_uniform_mat4("view", m_camera->get_view_matrix());
     m_shader->set_uniform_mat4("transform", m_transform.apply_transform(glm::mat4(1.0f)));
+
     m_mesh->draw();
 
     m_shader->unbind();
@@ -179,4 +176,14 @@ void Ant::turn_right()
         }
         break;
     }
+}
+
+void Ant::reset()
+{
+    m_dir = Ant::Direction::EAST;
+    m_x = 0.0f;
+    m_y = 0.0f;
+    m_target_x = 0.0f;
+    m_target_y = 0.0f;
+    m_speed = 0.5f;
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 
 LangtonsAnt::LangtonsAnt(int width, int height)
-    : m_window(nullptr), m_camera(nullptr), m_world(nullptr), m_ant(nullptr), m_running(true), m_paused(false)
+    : m_window(nullptr), m_camera(nullptr), m_world(nullptr), m_ant(nullptr), m_running(true), m_paused(false), m_gen(0)
 {
     m_window = new GameWindow("Langton's Ant", width, height);
     if (!m_window->init())
@@ -59,12 +59,12 @@ void LangtonsAnt::run()
                     break;
                     case SDL_WINDOWEVENT_FOCUS_GAINED:
                     {
-                        m_paused = false;
+                        // m_paused = false;
                     }
                     break;
                     case SDL_WINDOWEVENT_FOCUS_LOST:
                     {
-                        m_paused = true;
+                        // m_paused = true;
                     }
                     break;
                 }
@@ -98,17 +98,33 @@ void LangtonsAnt::handle_input(const SDL_Event &event)
                 m_paused = !m_paused;
             }
             break;
+            case SDLK_r:
+            {
+                reset();
+            }
+            break;
+            case SDLK_LEFT:
+            {
+                m_camera->move_left();
+            }
+            break;
             case SDLK_UP:
             {
-                m_ant->set_speed(m_ant->get_speed() + 0.01f);
+                if (!m_paused)
+                {
+                    m_ant->set_speed(m_ant->get_speed() + 0.05f);
+                }
             }
             break;
             case SDLK_DOWN:
             {
-                m_ant->set_speed(m_ant->get_speed() - 0.01f);
-                if (m_ant->get_speed() < 0.0f)
+                if (!m_paused)
                 {
-                    m_ant->set_speed(0.0f);
+                    m_ant->set_speed(m_ant->get_speed() - 0.05f);
+                    if (m_ant->get_speed() < 0.0f)
+                    {
+                        m_ant->set_speed(0.0f);
+                    }
                 }
             }
             break;
@@ -145,6 +161,8 @@ void LangtonsAnt::update(float delta)
             m_world->set_value(r, c, World::EMPTY);
             m_ant->turn_right();
         }
+        ++m_gen;
+        printf("gen: %d\n", m_gen);
     }
 }
 
@@ -156,4 +174,7 @@ void LangtonsAnt::render()
 
 void LangtonsAnt::reset()
 {
+    m_gen = 0;
+    m_world->reset();
+    m_ant->reset();
 }

@@ -21,7 +21,10 @@ private:
     int m_col_count;
     float m_cell_width;
     float m_cell_height;
+    float m_speed;
     int **m_grid;
+    float **m_cur_scale;
+    float **m_target_scale;
 
     Mesh *m_mesh;
     Shader *m_shader;
@@ -39,11 +42,7 @@ public:
     virtual void render();
     void reset(void);
     void print(void);
-
-    inline void set_value(int row, int col, int val)
-    {
-        m_grid[row][col] = val;
-    }
+    void set_value(int row, int col, int val);
     inline int get_value(int row, int col) const
     {
         return m_grid[row][col];
@@ -71,6 +70,14 @@ public:
     inline bool is_grid_rendered() const
     {
         return m_render_grid;
+    }
+    inline float get_speed() const
+    {
+        return m_speed;
+    }
+    inline void set_speed(float speed)
+    {
+        m_speed = speed;
     }
 };
 

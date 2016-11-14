@@ -18,6 +18,8 @@ private:
     bool m_running;
     bool m_paused;
 
+    int m_gen;
+
 public:
     LangtonsAnt(int width, int height);
     ~LangtonsAnt(void);
