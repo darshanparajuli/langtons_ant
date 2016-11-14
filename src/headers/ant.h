@@ -39,12 +39,14 @@ public:
     virtual void update(float delta_time);
     virtual void render(void);
     void reset(void);
-    inline void set_target_x(float x)
+    inline void set_x(float x)
     {
+        m_x = x;
         m_target_x = x;
     }
-    inline void set_target_y(float y)
+    inline void set_y(float y)
     {
+        m_y = y;
         m_target_y = y;
     }
     inline float get_x() const

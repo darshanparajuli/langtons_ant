@@ -35,6 +35,15 @@ void LangtonsAnt::init()
     std::srand(time(NULL));
     m_world->init();
     m_ant->init();
+    init_random_ant_pos();
+}
+
+void LangtonsAnt::init_random_ant_pos()
+{
+    // int rx = rand() % (m_world->get_col_count() - 5) - (m_world->get_col_count() - 5) / 2;
+    // int ry = rand() % (m_world->get_row_count() - 5) - (m_world->get_row_count() - 5) / 2;
+    // m_ant->set_x(m_world->get_cell_width() * rx);
+    // m_ant->set_y(m_world->get_cell_height() * ry);
 }
 
 void LangtonsAnt::run()
@@ -150,19 +159,26 @@ void LangtonsAnt::update(float delta)
     {
         int r = get_world_row_index(m_ant->get_y());
         int c = get_world_col_index(m_ant->get_x());
-        int value = m_world->get_value(r, c);
-        if (value == World::EMPTY)
+
+        if (r >= 0 && r < m_world->get_row_count() && c >= 0 && c < m_world->get_col_count())
         {
-            m_world->set_value(r, c, World::NON_EMPTY);
-            m_ant->turn_left();
+            int value = m_world->get_value(r, c);
+            if (value == World::EMPTY)
+            {
+                m_world->set_value(r, c, World::NON_EMPTY);
+                m_ant->turn_left();
+            }
+            else
+            {
+                m_world->set_value(r, c, World::EMPTY);
+                m_ant->turn_right();
+            }
+
+            ++m_gen;
+            char buf[128];
+            sprintf(buf, "Langton's Ant  -  Gen: %d  -  FPS: %d", m_gen, m_window->get_fps());
+            m_window->set_title(buf);
         }
-        else
-        {
-            m_world->set_value(r, c, World::EMPTY);
-            m_ant->turn_right();
-        }
-        ++m_gen;
-        printf("gen: %d\n", m_gen);
     }
 }
 
@@ -177,4 +193,5 @@ void LangtonsAnt::reset()
     m_gen = 0;
     m_world->reset();
     m_ant->reset();
+    init_random_ant_pos();
 }

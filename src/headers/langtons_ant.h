@@ -31,6 +31,7 @@ private:
     void update(float delta);
     void render(void);
     void reset(void);
+    void init_random_ant_pos(void);
     inline int get_world_row_index(float y) const
     {
         return (int)(y * m_world->get_row_count() * 0.5f + m_world->get_row_count() / 2);

@@ -16,6 +16,7 @@ private:
     unsigned int m_prev_frame_time;
     unsigned int m_frame_count;
     unsigned int m_prev_time;
+    unsigned int m_fps;
     float m_delta_time;
 
 private:
@@ -45,6 +46,14 @@ public:
     inline void exit(void)
     {
         m_running = false;
+    }
+    inline void set_title(const char *title)
+    {
+        SDL_SetWindowTitle(m_window, title);
+    }
+    inline int get_fps() const
+    {
+        return m_fps;
     }
 };
 

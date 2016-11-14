@@ -11,6 +11,7 @@ GameWindow::GameWindow(const char *title, int width, int height)
       m_prev_frame_time(0),
       m_frame_count(0),
       m_prev_time(0),
+      m_fps(0),
       m_delta_time(0.0f)
 {
 }
@@ -120,7 +121,8 @@ void GameWindow::update()
     unsigned int diff = time - m_prev_frame_time;
     if (diff >= 1000)
     {
-        // std::cout << "fps: " << m_frame_count << std::endl;
+        m_fps = m_frame_count;
+        // std::cout << "fps: " << m_fps << std::endl;
         m_prev_frame_time = time;
         m_frame_count = 0;
     }

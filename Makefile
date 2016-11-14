@@ -1,5 +1,5 @@
 CXX = clang++
-CFLAGS = -std=c++11 -Wall -g -O0
+CFLAGS = -std=c++11 -Wall -g -O2
 LDFLAGS = -lSDL2 -lSDL2_image -lGL -lGLU -lGLEW
 SRC_DIR = src
 BUILD_DIR = build

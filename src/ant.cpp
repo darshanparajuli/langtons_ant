@@ -13,7 +13,7 @@ Ant::Ant(Camera *camera, float w, float h)
       m_y(0.0f),
       m_target_x(m_x),
       m_target_y(m_y),
-      m_speed(0.1f),
+      m_speed(0.5f),
       m_dir(Ant::Direction::EAST)
 {
     glm::vec3 vertices[] = {glm::vec3(-w / 2.0f, -h / 2.0f, 0.0f), glm::vec3(-w / 2.0f, h / 2.0f, 0.0f),
